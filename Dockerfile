@@ -34,7 +34,11 @@ COPY --from=builder /app/public ./public
 # Prisma engine + schema so `migrate deploy` can run if needed.
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/prisma ./prisma
+# Copy node_modules for npx commands
+COPY --from=builder /app/node_modules ./node_modules
+# Copy startup script
+COPY --from=builder --chown=nextjs:nodejs /app/startup.sh ./startup.sh
 
 USER nextjs
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["sh", "startup.sh"]
