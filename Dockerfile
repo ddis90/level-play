@@ -27,9 +27,10 @@ RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/
 RUN groupadd -g 1001 nodejs && useradd -u 1001 -g nodejs -s /bin/bash -m nextjs
 
 # Standalone output bundles only what is needed to run.
-COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy public directory if it exists (Next.js may create it during build)
+COPY --from=builder /app/public ./public
 # Prisma engine + schema so `migrate deploy` can run if needed.
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/prisma ./prisma
