@@ -1,0 +1,312 @@
+// Levelplay Constructions — portal data model.
+// Designed so roles map cleanly to Azure AD / Entra ID groups later, and so
+// document/media visibility (client vs internal) is enforced at the data layer.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- People & access ---------------------------------------------------------
+
+// Roles are modeled as named groups. Each maps 1:1 to an Azure AD group when you
+// migrate — store the Entra group object id in `azureAdGroupId` at that point.
+enum RoleName {
+  CLIENT
+  ADMIN
+  PROJECT_ADMIN
+  PROJECT_OWNER
+  PROJECT_INCHARGE
+  ENGINEER
+  ARCHITECT
+  WORKER
+}
+
+model Role {
+  id             String   @id @default(cuid())
+  name           RoleName @unique
+  label          String
+  description    String?
+  azureAdGroupId String?  @unique // filled in when migrating to Entra ID
+  users          UserRole[]
+  createdAt      DateTime @default(now())
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  fullName     String
+  phone        String?
+  passwordHash String   // local POC only; Entra ID replaces this later
+  isActive     Boolean  @default(true)
+  roles        UserRole[]
+  memberships  ProjectMembership[]
+  uploads      Document[] @relation("UploadedBy")
+  indentsRaised Indent[]
+  grnsReceived  Grn[]
+  dprsReported  DailyProgressReport[]
+  stagesVerified StageVerification[]
+  variationsApproved Variation[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Join table: a user can hold multiple roles (e.g. ENGINEER + PROJECT_INCHARGE).
+model UserRole {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId String
+
+  @@id([userId, roleId])
+}
+
+// --- Projects ----------------------------------------------------------------
+
+enum ProjectStatus {
+  LEAD            // came in via the website onboarding form
+  ONBOARDING
+  DESIGN          // floor plan / drawing discussions
+  IN_PROGRESS
+  ON_HOLD
+  HANDOVER
+  COMPLETED
+}
+
+// GST treatment drives the tax rate applied on invoices (India).
+enum GstTreatment {
+  UNDER_CONSTRUCTION_5PCT
+  AFFORDABLE_1PCT
+  WORKS_CONTRACT_18PCT
+  COMMERCIAL_18PCT
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  code        String        @unique // human-friendly e.g. LP-2026-001
+  name        String
+  description String?
+  status      ProjectStatus @default(LEAD)
+  city        String?
+  addressLine String?
+  budget      Decimal?      @db.Decimal(14, 2)
+  startDate   DateTime?
+  targetDate  DateTime?
+
+  // --- Billing / GST (India) ---
+  gstin            String?
+  pan              String?
+  billingAddress   String?
+  stateCode        String?       @default("29") // 29 = Karnataka
+  gstTreatment     GstTreatment  @default(UNDER_CONSTRUCTION_5PCT)
+  baseContractValue Decimal?     @db.Decimal(14, 2)
+  contractValue    Decimal?      @db.Decimal(14, 2)
+  retentionPercent Decimal?      @db.Decimal(5, 2)
+  defectLiabilityMonths Int?
+
+  // --- RERA / statutory disclosures ---
+  reraApplicable        Boolean   @default(false)
+  reraRegistrationNumber String?
+  carpetAreaSqft        Decimal?  @db.Decimal(10, 2)
+  superBuiltUpSqft      Decimal?  @db.Decimal(10, 2)
+  numberOfUnits         Int?
+  reraCompletionDate    DateTime?
+  khataType             String?
+  surveyNumber          String?
+  propertyId            String?
+
+  members      ProjectMembership[]
+  documents    Document[]
+  payments     Payment[]
+  items        DeliveryItem[]
+  requests     ItemRequest[]
+  handover     Handover?
+  invoices     Invoice[]
+  receipts     Receipt[]
+  indents      Indent[]
+  purchaseOrders PurchaseOrder[]
+  grns         Grn[]
+  stockLedger  StockLedger[]
+  dprs         DailyProgressReport[]
+  stageVerifications StageVerification[]
+  variations   Variation[]
+  approvals    Approval[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Which users are attached to a project and in what capacity.
+model ProjectMembership {
+  id        String   @id @default(cuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  role      RoleName // capacity on THIS project (a user may differ per project)
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, userId, role])
+}
+
+// --- Documents & media (the visibility abstraction) --------------------------
+
+// Visibility controls who can see a document/media item.
+//   CLIENT_VISIBLE = clients + all internal roles
+//   INTERNAL       = staff only (project admins, engineers, workers, etc.)
+//   ADMIN_ONLY     = admins / project admins only
+enum Visibility {
+  CLIENT_VISIBLE
+  INTERNAL
+  ADMIN_ONLY
+}
+
+enum DocumentKind {
+  FLOOR_PLAN
+  ELECTRICAL_DRAWING
+  PLUMBING_DRAWING
+  STRUCTURAL_DRAWING
+  SITE_PHOTO
+  PROGRESS_VIDEO
+  CONTRACT
+  INVOICE
+  RECEIPT
+  RERA_CERTIFICATE
+  SANCTIONED_PLAN
+  SALE_AGREEMENT
+  ALLOTMENT_LETTER
+  TDS_CERTIFICATE
+  SUGGESTION
+  OTHER
+}
+
+model Document {
+  id          String       @id @default(cuid())
+  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+  title       String
+  kind        DocumentKind @default(OTHER)
+  visibility  Visibility   @default(INTERNAL)
+  // For the POC we store a path/URL. In Azure this becomes a Blob Storage URL.
+  fileUrl     String
+  mimeType    String?
+  sizeBytes   Int?
+  uploadedBy  User         @relation("UploadedBy", fields: [uploadedById], references: [id])
+  uploadedById String
+  createdAt   DateTime     @default(now())
+
+  // Back-relations for documents used as evidence / attachments.
+  paymentEvidence    Payment[]           @relation("PaymentEvidence")
+  invoicePdf         Invoice[]
+  receiptPdf         Receipt[]
+  dprMedia           DprMedia[]
+  stageEvidence      StageVerification[]
+  variationDocs      Variation[]
+  approvalDocs       Approval[]
+
+  @@index([projectId, visibility])
+}
+
+// --- Payments (transparency & audit) -----------------------------------------
+
+enum PaymentStatus {
+  PLANNED
+  INVOICED
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+}
+
+// Stage in the Indian residential payment ladder.
+enum PaymentStage {
+  BOOKING
+  FOUNDATION
+  PLINTH
+  SLAB
+  BRICKWORK
+  PLASTERING
+  FLOORING
+  FINISHING
+  HANDOVER
+  RETENTION_RELEASE
+  CUSTOM
+}
+
+// A payment milestone in the project's payment structure.
+model Payment {
+  id          String        @id @default(cuid())
+  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+  milestone   String        // e.g. "Foundation complete"
+  amount      Decimal       @db.Decimal(14, 2)
+  status      PaymentStatus @default(PLANNED)
+  dueDate     DateTime?
+  paidDate    DateTime?
+  reference   String?       // receipt / transaction ref for the audit trail
+
+  // --- Stage ladder (India) ---
+  sequence         Int?
+  percentOfContract Decimal? @db.Decimal(5, 2)
+  stage            PaymentStage @default(CUSTOM)
+  // Evidence (DPR photo/video) that gates raising this demand.
+  linkedDocument   Document?    @relation("PaymentEvidence", fields: [linkedDocumentId], references: [id])
+  linkedDocumentId String?
+
+  invoices    Invoice[]
+  receipts    Receipt[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([projectId, status])
+}
+
+// --- Delivery & item requests ------------------------------------------------
+
+enum DeliveryStatus {
+  REQUESTED
+  ORDERED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+model DeliveryItem {
+  id          String         @id @default(cuid())
+  project     Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+  name        String
+  quantity    Int            @default(1)
+  unit        String?
+  status      DeliveryStatus @default(REQUESTED)
+  expectedAt  DateTime?
+  deliveredAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model ItemRequest {
+  id          String   @id @default(cuid())
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+  requestedBy String   // user id or name (kept loose for the POC)
+  description String
+  fulfilled   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+// --- Handover ----------------------------------------------------------------
+
+model Handover {
+  id          String    @id @default(cuid())
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String    @unique
+  summary     String?
+  handedOverAt DateTime?
+  signedOff   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+}

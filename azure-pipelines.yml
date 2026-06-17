@@ -1,0 +1,42 @@
+# Azure DevOps Pipeline for Levelplay
+trigger:
+- main
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  acrName: 'lpdevregistry848e7b'
+  resourceGroup: 'rg-levelplay-dev'
+  containerApp: 'lp-dev-web-kopp3c4slv3eg'
+  imageName: 'levelplay-web'
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Build Docker image in ACR'
+  inputs:
+    azureSubscription: 'Azure-Service-Connection'  # Create this in Azure DevOps
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr build \
+        --registry $(acrName) \
+        --image $(imageName):$(Build.BuildId) \
+        --image $(imageName):latest \
+        --file ./Dockerfile \
+        .
+
+- task: AzureCLI@2
+  displayName: 'Deploy to Container App'
+  inputs:
+    azureSubscription: 'Azure-Service-Connection'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az containerapp update \
+        --name $(containerApp) \
+        --resource-group $(resourceGroup) \
+        --image $(acrName).azurecr.io/$(imageName):$(Build.BuildId)
+
+      echo "Deployed to: https://lp-dev-web-kopp3c4slv3eg.delightfulpebble-1cfc730a.eastus.azurecontainerapps.io"

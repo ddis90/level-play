@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Env (never commit real secrets)
+.env
+.env.*
+.env.local
+.env.*.local
+!.env.example
+
+# Prisma local artifacts
+prisma/dev.db
+.localpg/
+
+# Azure
+.azure/
+
+# Misc
+.DS_Store
+*.log
+.vercel
+*.zip
+
+# Temp deployment files
+levelplay-deploy.zip

@@ -1,0 +1,32 @@
+# Azure Developer CLI (azd) project definition.
+# Deploy with:  azd auth login  ->  azd env new dev  ->  azd up
+# Re-run `azd up` for prd after `azd env new prd`.
+name: levelplay-portal
+metadata:
+  template: levelplay-portal@0.1.0
+
+services:
+  web:
+    project: .
+    language: js
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+
+# Infra is Bicep under ./infra. `azd up` provisions then deploys.
+infra:
+  provider: bicep
+  path: ./infra
+  module: main
+
+hooks:
+  # After provisioning, run Prisma migrations against the freshly created DB.
+  postprovision:
+    windows:
+      shell: pwsh
+      run: npx prisma migrate deploy
+    posix:
+      shell: sh
+      run: npx prisma migrate deploy
+    interactive: false
+    continueOnError: false

@@ -1,0 +1,48 @@
+name: Build and Deploy to Azure
+
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [ main, master ]
+
+env:
+  AZURE_SUBSCRIPTION_ID: 738826d4-0935-48a2-b402-670d99728697
+  RESOURCE_GROUP: rg-levelplay-dev
+  CONTAINER_APP: lp-dev-web-kopp3c4slv3eg
+  ACR_NAME: lpdevregistry848e7b
+  IMAGE_NAME: levelplay-web
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Build image in ACR
+      run: |
+        az acr build \
+          --registry ${{ env.ACR_NAME }} \
+          --image ${{ env.IMAGE_NAME }}:${{ github.sha }} \
+          --image ${{ env.IMAGE_NAME }}:latest \
+          --file ./Dockerfile \
+          .
+
+    - name: Deploy to Container App
+      run: |
+        az containerapp update \
+          --name ${{ env.CONTAINER_APP }} \
+          --resource-group ${{ env.RESOURCE_GROUP }} \
+          --image ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+    - name: Run database migrations
+      run: |
+        az containerapp exec \
+          --name ${{ env.CONTAINER_APP }} \
+          --resource-group ${{ env.RESOURCE_GROUP }} \
+          --command "npx prisma migrate deploy"
