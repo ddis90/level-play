@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 const NAV = [
   { href: '/#services', label: 'Services' },
   { href: '/#projects', label: 'Projects' },
+  { href: '/team', label: 'Our Team' },
   { href: '/#why', label: 'Why Us' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -61,6 +62,7 @@ export function SiteFooter() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/#services" className="hover:text-white">Services</Link></li>
               <li><Link href="/#projects" className="hover:text-white">Projects</Link></li>
+              <li><Link href="/team" className="hover:text-white">Our Team</Link></li>
               <li><Link href="/contact" className="hover:text-white">Get a Quote</Link></li>
               <li><Link href="/login" className="hover:text-white">Client Login</Link></li>
             </ul>
