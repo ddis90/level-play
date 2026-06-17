@@ -26,6 +26,7 @@ jobs:
 
     - name: Build image in ACR
       run: |
+        cd web
         az acr build \
           --registry ${{ env.ACR_NAME }} \
           --image ${{ env.IMAGE_NAME }}:${{ github.sha }} \
