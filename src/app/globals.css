@@ -1,34 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* shadcn/ui design tokens (HSL). Brand: navy + amber construction palette. */
+/* Dark theme: Deep slate with amber accents */
 @layer base {
   :root {
-    --background: 60 9% 98%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 11 76% 61%;            /* amber-strong #e76f51 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 51% 15%;         /* navy #0d1b2a */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 60 5% 94%;
-    --muted-foreground: 213 28% 36%;  /* slate */
-    --accent: 43 100% 51%;            /* gold #ffb703 */
-    --accent-foreground: 210 51% 15%;
-    --destructive: 355 78% 56%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 15% 88%;
-    --input: 214 15% 88%;
-    --ring: 11 76% 61%;
+    --background: 222 47% 7%;         /* #0a0f1a - deep slate */
+    --foreground: 0 0% 98%;           /* #fafafa - off-white */
+    --card: 222 47% 10%;              /* #0f1624 - card background */
+    --card-foreground: 0 0% 98%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 32 95% 58%;            /* #f59e0b - amber-500 */
+    --primary-foreground: 222 47% 7%;
+    --secondary: 217 33% 17%;         /* #1e293b - slate-800 */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;  /* #94a3b8 - slate-400 */
+    --accent: 32 95% 58%;             /* amber accent */
+    --accent-foreground: 222 47% 7%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 17%;            /* subtle borders */
+    --input: 217 33% 17%;
+    --ring: 32 95% 58%;
     --radius: 0.85rem;
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-display: 'Sora', var(--font-sans);
+    --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-display: 'Syne', var(--font-sans);
   }
 
   * {
@@ -63,15 +63,15 @@
 html, body { padding: 0; margin: 0; }
 
 body {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  color: var(--ink);
-  background: var(--paper);
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #fafafa;
+  background: #0a0f1a;
   line-height: 1.6;
   font-weight: 400;
 }
 
 .font-display {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Syne', system-ui, sans-serif;
 }
 
 a { color: inherit; text-decoration: none; }

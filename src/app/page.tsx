@@ -50,67 +50,86 @@ export default function HomePage() {
     <>
       <SiteHeader />
 
-      {/* Hero Section - Clean and Professional */}
-      <section className="relative bg-white py-20 md:py-32 overflow-hidden">
+      {/* Hero Section - Dark Cinematic */}
+      <section className="relative bg-slate-950 py-24 md:py-40 overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M0 0h60v60H0z' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E")`,
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
         }}></div>
 
-        <div className="container relative">
+        <div className="container relative z-10">
           <motion.div
-            className="max-w-4xl"
+            className="max-w-5xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8 }}
           >
-            <p className="text-amber-700 font-semibold text-sm tracking-wider uppercase mb-4">
-              Bangalore · Karnataka
+            <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-6">
+              Premium Construction · Karnataka
             </p>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-6 leading-tight">
-              Build with <span className="font-semibold text-amber-700">confidence</span>,
-              <br />track every brick
+            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-[0.95]">
+              Build with{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
+                  precision
+                </span>
+                <span className="absolute inset-0 blur-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 opacity-30"></span>
+              </span>
+              ,<br />
+              track every moment
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed">
-              Premium construction meets digital transparency. Track every milestone,
-              payment, and progress update in real-time through your personal portal.
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl leading-relaxed font-light">
+              Digital-first construction management. Every milestone, payment, and photo
+              visible in your personal portal. No surprises, complete transparency.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-5">
               <Link
                 href="/contact"
-                className="px-8 py-4 bg-amber-700 hover:bg-amber-800 text-white font-medium rounded-md transition-colors duration-200"
+                className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
               >
-                Start Your Project →
+                Start Your Project
+                <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
               <Link
                 href="/#projects"
-                className="px-8 py-4 border-2 border-slate-300 hover:border-amber-700 text-slate-700 hover:text-amber-700 font-medium rounded-md transition-colors duration-200"
+                className="px-10 py-5 border-2 border-slate-700 hover:border-amber-500 text-slate-200 hover:text-amber-400 font-semibold rounded-xl transition-all duration-300 hover:bg-slate-900/50"
               >
-                View Our Work
+                View Portfolio
               </Link>
             </div>
           </motion.div>
         </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent"></div>
       </section>
 
       {/* Stats Section */}
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-900 py-20 border-y border-slate-800">
         <div className="container">
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-12"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             {STATS.map((s) => (
-              <motion.div key={s.label} variants={itemVariants} className="text-center">
-                <div className="text-4xl md:text-5xl font-light text-amber-700 mb-2">{s.num}</div>
-                <div className="text-sm text-slate-600 font-medium">{s.label}</div>
+              <motion.div key={s.label} variants={itemVariants} className="text-center group">
+                <div className="text-5xl md:text-6xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-orange-500 mb-3 group-hover:scale-110 transition-transform">
+                  {s.num}
+                </div>
+                <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">{s.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -118,22 +137,22 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-24 bg-slate-950">
         <div className="container">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-amber-700 font-semibold text-sm tracking-wider uppercase mb-3">
-              What We Build
+            <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
+              Comprehensive Services
             </p>
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-4">
-              End-to-end construction services
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+              End-to-end construction
             </h2>
-            <p className="text-lg text-slate-600">
-              From a single home to a commercial complex, we manage design, build and interiors under one roof.
+            <p className="text-xl text-slate-400 leading-relaxed">
+              From concept to completion. Design, build, and interiors managed by a single expert team.
             </p>
           </motion.div>
 
@@ -148,11 +167,25 @@ export default function HomePage() {
               <motion.div
                 key={s.title}
                 variants={itemVariants}
-                className="group p-8 bg-white border border-slate-200 hover:border-amber-700 rounded-lg transition-all duration-300 hover:shadow-lg"
+                className="group relative p-8 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-amber-500/50 rounded-2xl transition-all duration-500 overflow-hidden"
               >
-                <div className="text-5xl mb-5">{s.icon}</div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{s.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{s.body}</p>
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
+                </div>
+
+                <div className="relative z-10">
+                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    {s.icon}
+                  </div>
+                  <h3 className="text-xl font-bold font-display text-white mb-4 group-hover:text-amber-400 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed">{s.body}</p>
+                </div>
+
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-amber-500 to-orange-500 group-hover:w-full transition-all duration-500"></div>
               </motion.div>
             ))}
           </motion.div>
@@ -160,22 +193,22 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-slate-50">
+      <section id="projects" className="py-24 bg-slate-900">
         <div className="container">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-amber-700 font-semibold text-sm tracking-wider uppercase mb-3">
-              Our Work
+            <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
+              Our Portfolio
             </p>
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-4">
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Projects across Karnataka
             </h2>
-            <p className="text-lg text-slate-600">
-              A snapshot of ongoing and completed builds. Clients follow every one of these live in the portal.
+            <p className="text-xl text-slate-400 leading-relaxed">
+              Real-time progress tracking for every project. Clients see updates live in their portal.
             </p>
           </motion.div>
 
@@ -190,24 +223,34 @@ export default function HomePage() {
               <motion.div
                 key={p.name}
                 variants={itemVariants}
-                className="group bg-white border border-slate-200 hover:border-amber-700 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg"
+                className="group bg-slate-950 border border-slate-800 hover:border-amber-500/50 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105"
               >
-                <div className="h-48 bg-slate-100 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-100"></div>
-                  <span className="relative text-6xl font-light text-slate-300">LP</span>
+                <div className="h-56 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 flex items-center justify-center relative overflow-hidden">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                  </div>
+                  <span className="relative text-8xl font-bold font-display text-slate-700 group-hover:text-slate-600 transition-colors">LP</span>
                 </div>
-                <div className="p-6">
-                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
-                    p.badge === 'progress' ? 'bg-amber-100 text-amber-800' :
-                    p.badge === 'done' ? 'bg-green-100 text-green-800' :
-                    'bg-blue-100 text-blue-800'
+
+                <div className="p-6 relative">
+                  <div className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 ${
+                    p.badge === 'progress' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                    p.badge === 'done' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                    'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                   }`}>
                     {p.status}
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                  <h3 className="text-lg font-bold font-display text-white mb-3 group-hover:text-amber-400 transition-colors">
                     {p.name}
                   </h3>
-                  <p className="text-slate-600 text-sm">{p.city}</p>
+                  <p className="text-slate-400 text-sm flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {p.city}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -216,20 +259,23 @@ export default function HomePage() {
       </section>
 
       {/* Why Us Section */}
-      <section id="why" className="py-20 bg-white">
+      <section id="why" className="py-24 bg-slate-950 border-t border-slate-800">
         <div className="container">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-amber-700 font-semibold text-sm tracking-wider uppercase mb-3">
+            <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
               Why Levelplay
             </p>
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-4">
-              A builder and a platform in one
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+              Builder + Platform
             </h2>
+            <p className="text-xl text-slate-400 leading-relaxed">
+              Not just construction. A complete digital experience for modern clients.
+            </p>
           </motion.div>
 
           <motion.div
@@ -243,11 +289,13 @@ export default function HomePage() {
               <motion.div
                 key={w.title}
                 variants={itemVariants}
-                className="p-8 bg-slate-50 border border-slate-200 rounded-lg hover:border-amber-700 transition-colors duration-300"
+                className="group p-8 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl hover:border-amber-500/50 transition-all duration-500"
               >
-                <div className="text-4xl mb-5">{w.icon}</div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{w.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{w.body}</p>
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{w.icon}</div>
+                <h3 className="text-xl font-bold font-display text-white mb-4 group-hover:text-amber-400 transition-colors">
+                  {w.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed">{w.body}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -255,26 +303,32 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-amber-700 text-white">
-        <div className="container">
+      <section className="relative py-32 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-500/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        </div>
+
+        <div className="container relative z-10">
           <motion.div
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-light mb-6">
-              Ready to start your build?
+            <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+              Ready to start <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">your build</span>?
             </h2>
-            <p className="text-xl text-amber-100 mb-10 leading-relaxed">
-              Tell us about your plot and requirements. Our team will get back with a
-              consultation and an estimate.
+            <p className="text-2xl text-slate-300 mb-12 leading-relaxed font-light">
+              Share your plot details and vision. Our team will respond with a personalized
+              consultation and transparent estimate.
             </p>
             <Link
               href="/contact"
-              className="inline-block px-10 py-4 bg-white text-amber-700 font-semibold rounded-md hover:bg-amber-50 transition-colors duration-200"
+              className="inline-block px-12 py-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-lg rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
             >
-              Request a Consultation →
+              Request Consultation →
             </Link>
           </motion.div>
         </div>
