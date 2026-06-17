@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700;800;900&family=Cabinet+Grotesk:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -63,14 +63,15 @@
 html, body { padding: 0; margin: 0; }
 
 body {
-  font-family: 'Cabinet Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: var(--ink);
   background: var(--paper);
   line-height: 1.6;
+  font-weight: 400;
 }
 
 .font-display {
-  font-family: 'Clash Display', 'Cabinet Grotesk', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 a { color: inherit; text-decoration: none; }
