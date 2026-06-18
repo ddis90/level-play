@@ -5,31 +5,78 @@ import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import { motion } from 'framer-motion';
 
 const SERVICES = [
-  { icon: '🏠', title: 'Home Construction', body: 'Independent houses and duplex villas built to your plan, from foundation to finishing.' },
-  { icon: '🏢', title: 'Apartment Construction', body: 'Multi-unit residential blocks delivered with structural integrity and on-time milestones.' },
-  { icon: '🏬', title: 'Commercial Construction', body: 'Retail, office and mixed-use spaces designed for footfall, function and durability.' },
-  { icon: '🛋️', title: 'Interior Design', body: 'Turnkey interiors — modular kitchens, wardrobes, false ceilings and bespoke finishes.' },
+  {
+    icon: '🏠',
+    title: 'Individual Homes & Villas',
+    body: 'Custom-designed independent houses and duplex villas. From 30x40 plots to sprawling estates — built as per Vastu, with RERA compliance and transparent costing.'
+  },
+  {
+    icon: '🏢',
+    title: 'Apartment Projects',
+    body: 'G+4 to high-rise residential complexes with modern amenities. Earthquake-resistant design, proper ventilation, and approved layouts from BBMP/BDA/BMRDA.'
+  },
+  {
+    icon: '🏬',
+    title: 'Commercial Spaces',
+    body: 'Shops, showrooms, offices, and warehouses built for business growth. Strategic layouts, ample parking, 100% Vaastu-compliant if required.'
+  },
+  {
+    icon: '🛋️',
+    title: 'Interiors & Fit-outs',
+    body: 'Complete interior solutions — modular kitchens, wardrobes, false ceilings, electrical & plumbing. Premium finishes that suit Indian lifestyles.'
+  },
 ];
 
 const PROJECTS = [
-  { name: 'Sharma Residence — Duplex Villa', city: 'RR Nagar, Bangalore', status: 'In Progress', badge: 'progress' },
-  { name: 'Greenfield Apartments', city: 'Mysuru', status: 'Design Phase', badge: 'design' },
-  { name: 'Sai Commercial Complex', city: 'Davanagere', status: 'Completed', badge: 'done' },
-  { name: 'Lakeview Interiors', city: 'Shivamogga', status: 'Completed', badge: 'done' },
+  { name: 'Sharma Family Villa', city: 'RR Nagar, Bengaluru', status: 'Under Construction', badge: 'progress', area: '2,400 sq.ft' },
+  { name: 'Green Orchards Apartment', city: 'Mysuru Road', status: 'Design Approval', badge: 'design', area: '24 Units, G+4' },
+  { name: 'Sri Sai Commercial Complex', city: 'Davangere', status: 'Completed & Handed Over', badge: 'done', area: '12,000 sq.ft' },
+  { name: 'Lakeview Premium Interiors', city: 'Shivamogga', status: 'Completed', badge: 'done', area: '3 BHK, 1,800 sq.ft' },
 ];
 
 const STATS = [
-  { num: '120+', label: 'Projects Delivered' },
-  { num: '8', label: 'Cities Served' },
-  { num: '15+', label: 'Years Experience' },
-  { num: '100%', label: 'Transparent' },
+  { num: '120+', label: 'Happy Families', sublabel: 'Across Karnataka' },
+  { num: '₹85 Cr+', label: 'Projects Delivered', sublabel: 'Since 2010' },
+  { num: '15+', label: 'Years Experience', sublabel: 'In Construction' },
+  { num: '100%', label: 'RERA Compliant', sublabel: 'Transparent Process' },
 ];
 
 const WHY = [
-  { icon: '📐', title: 'Turnkey Delivery', body: 'One accountable team from design drawings to handover — no coordination headaches.' },
-  { icon: '💳', title: 'Transparent Payments', body: 'Milestone-based payment structure with a full audit trail you can see anytime.' },
-  { icon: '📲', title: 'Live Project Portal', body: 'Track progress photos, drawings, deliveries and approvals from your phone or laptop.' },
-  { icon: '🌱', title: 'Quality & Sustainability', body: 'Certified materials and eco-conscious methods on every build.' },
+  {
+    icon: '📐',
+    title: 'End-to-End Accountability',
+    body: 'From BBMP plan approval to final handover — one team, one point of contact. No sub-contractor confusion or finger-pointing.'
+  },
+  {
+    icon: '💳',
+    title: 'Clear Payment Structure',
+    body: 'Pay only at milestones: Foundation, Slab, Plastering, Finishing. Every rupee tracked with bills, photos, and digital receipts in your portal.'
+  },
+  {
+    icon: '📲',
+    title: 'Live Construction Updates',
+    body: 'Daily site photos, material delivery tracking, and engineer reports — all accessible from your mobile. No surprise delays or hidden costs.'
+  },
+  {
+    icon: '🌱',
+    title: 'Quality Materials & Vaastu',
+    body: 'ISI-marked steel, ACC/UltraTech cement, and reputed brands. Vastu consultation available. Green building practices for lower electricity bills.'
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    name: 'Rajesh & Priya Kumar',
+    location: 'JP Nagar, Bengaluru',
+    quote: 'Built our dream home exactly as we imagined. The portal made everything transparent — no tension, no surprise bills.',
+    project: '2 BHK Villa'
+  },
+  {
+    name: 'Venkatesh Reddy',
+    location: 'Mysuru',
+    quote: 'Very professional team. They handled BBMP approvals, electricity connection, everything. I just had to visit on weekends to check progress.',
+    project: '3 BHK Duplex'
+  },
 ];
 
 const containerVariants = {
@@ -50,7 +97,7 @@ export default function HomePage() {
     <>
       <SiteHeader />
 
-      {/* Hero Section - Dark Cinematic */}
+      {/* Hero Section - Indian Market Focus */}
       <section className="relative bg-slate-950 py-24 md:py-40 overflow-hidden">
         {/* Animated gradient background */}
         <div className="absolute inset-0 opacity-30">
@@ -72,39 +119,60 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-6">
-              Premium Construction · Karnataka
+              Bengaluru & Karnataka | RERA Registered
             </p>
 
-            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-[0.95]">
-              Build with{' '}
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-[0.95]">
+              Build Your{' '}
               <span className="relative inline-block">
                 <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
-                  precision
+                  Dream Home
                 </span>
                 <span className="absolute inset-0 blur-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 opacity-30"></span>
               </span>
               ,<br />
-              track every moment
+              Track Every Brick
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl leading-relaxed font-light">
-              Digital-first construction management. Every milestone, payment, and photo
-              visible in your personal portal. No surprises, complete transparency.
+            <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl leading-relaxed font-light">
+              No hidden costs. No delays. No tension. Just transparent construction
+              with real-time updates on your phone.
             </p>
+
+            <div className="mb-12 flex flex-wrap gap-4 items-center">
+              <div className="flex items-center gap-2 text-green-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">RERA Approved</span>
+              </div>
+              <div className="flex items-center gap-2 text-blue-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">Vastu Consultation</span>
+              </div>
+              <div className="flex items-center gap-2 text-amber-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm font-medium">Premium Materials</span>
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-5">
               <Link
                 href="/contact"
                 className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
               >
-                Start Your Project
+                Get Free Quotation
                 <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
               <Link
                 href="/#projects"
                 className="px-10 py-5 border-2 border-slate-700 hover:border-amber-500 text-slate-200 hover:text-amber-400 font-semibold rounded-xl transition-all duration-300 hover:bg-slate-900/50"
               >
-                View Portfolio
+                View Our Projects
               </Link>
             </div>
           </motion.div>
@@ -118,7 +186,7 @@ export default function HomePage() {
       <section className="bg-slate-900 py-20 border-y border-slate-800">
         <div className="container">
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-12"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -126,10 +194,11 @@ export default function HomePage() {
           >
             {STATS.map((s) => (
               <motion.div key={s.label} variants={itemVariants} className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-orange-500 mb-3 group-hover:scale-110 transition-transform">
+                <div className="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-orange-500 mb-2 group-hover:scale-110 transition-transform">
                   {s.num}
                 </div>
-                <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">{s.label}</div>
+                <div className="text-sm text-slate-300 font-semibold">{s.label}</div>
+                <div className="text-xs text-slate-500 mt-1">{s.sublabel}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -146,13 +215,14 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
-              Comprehensive Services
+              Complete Construction Solutions
             </p>
-            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
-              End-to-end construction
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              What We Build
             </h2>
             <p className="text-xl text-slate-400 leading-relaxed">
-              From concept to completion. Design, build, and interiors managed by a single expert team.
+              From plot purchase guidance to final interior finishing — we handle everything
+              so you can focus on your dream, not the paperwork.
             </p>
           </motion.div>
 
@@ -175,13 +245,13 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative z-10">
-                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
                     {s.icon}
                   </div>
                   <h3 className="text-xl font-bold font-display text-white mb-4 group-hover:text-amber-400 transition-colors">
                     {s.title}
                   </h3>
-                  <p className="text-slate-400 leading-relaxed">{s.body}</p>
+                  <p className="text-slate-400 leading-relaxed text-sm">{s.body}</p>
                 </div>
 
                 {/* Bottom accent line */}
@@ -202,13 +272,13 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
-              Our Portfolio
+              Our Recent Work
             </p>
-            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
-              Projects across Karnataka
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              Projects Across Karnataka
             </h2>
             <p className="text-xl text-slate-400 leading-relaxed">
-              Real-time progress tracking for every project. Clients see updates live in their portal.
+              From Bengaluru to tier-2 cities — building quality homes for Indian families.
             </p>
           </motion.div>
 
@@ -230,7 +300,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 opacity-20">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                   </div>
-                  <span className="relative text-8xl font-bold font-display text-slate-700 group-hover:text-slate-600 transition-colors">LP</span>
+                  <span className="relative text-7xl font-bold font-display text-slate-700 group-hover:text-slate-600 transition-colors">LP</span>
                 </div>
 
                 <div className="p-6 relative">
@@ -241,16 +311,17 @@ export default function HomePage() {
                   }`}>
                     {p.status}
                   </div>
-                  <h3 className="text-lg font-bold font-display text-white mb-3 group-hover:text-amber-400 transition-colors">
+                  <h3 className="text-lg font-bold font-display text-white mb-2 group-hover:text-amber-400 transition-colors">
                     {p.name}
                   </h3>
-                  <p className="text-slate-400 text-sm flex items-center gap-2">
+                  <p className="text-slate-400 text-sm flex items-center gap-2 mb-2">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     {p.city}
                   </p>
+                  <p className="text-slate-500 text-xs font-mono">{p.area}</p>
                 </div>
               </motion.div>
             ))}
@@ -268,13 +339,13 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
-              Why Levelplay
+              Why Choose Levelplay
             </p>
-            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
-              Builder + Platform
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              Hassle-Free Construction
             </h2>
             <p className="text-xl text-slate-400 leading-relaxed">
-              Not just construction. A complete digital experience for modern clients.
+              15 years of building trust, one home at a time.
             </p>
           </motion.div>
 
@@ -291,11 +362,66 @@ export default function HomePage() {
                 variants={itemVariants}
                 className="group p-8 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl hover:border-amber-500/50 transition-all duration-500"
               >
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{w.icon}</div>
+                <div className="text-4xl mb-6 group-hover:scale-110 transition-transform">{w.icon}</div>
                 <h3 className="text-xl font-bold font-display text-white mb-4 group-hover:text-amber-400 transition-colors">
                   {w.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed">{w.body}</p>
+                <p className="text-slate-400 leading-relaxed text-sm">{w.body}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-slate-900">
+        <div className="container">
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-4">
+              Client Testimonials
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              What Our Clients Say
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {TESTIMONIALS.map((t, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="p-8 bg-slate-950 border border-slate-800 rounded-2xl"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-slate-950 font-bold text-lg">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="font-bold text-white">{t.name}</div>
+                    <div className="text-sm text-slate-400">{t.location} • {t.project}</div>
+                  </div>
+                </div>
+                <p className="text-slate-300 leading-relaxed italic">
+                  "{t.quote}"
+                </p>
+                <div className="mt-4 flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -317,19 +443,33 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-              Ready to start <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">your build</span>?
+            <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+              Ready to Build Your{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                Dream Home
+              </span>?
             </h2>
             <p className="text-2xl text-slate-300 mb-12 leading-relaxed font-light">
-              Share your plot details and vision. Our team will respond with a personalized
-              consultation and transparent estimate.
+              Share your plot details and budget. Get a detailed quotation and
+              construction timeline within 48 hours.
             </p>
-            <Link
-              href="/contact"
-              className="inline-block px-12 py-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-lg rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
-            >
-              Request Consultation →
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="inline-block px-12 py-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-lg rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
+              >
+                Get Free Consultation →
+              </Link>
+              <a
+                href="tel:+919876543210"
+                className="inline-block px-12 py-6 border-2 border-amber-500 text-amber-400 font-bold text-lg rounded-xl hover:bg-amber-500/10 transition-all duration-300"
+              >
+                📞 Call: +91 98765 43210
+              </a>
+            </div>
+            <p className="mt-8 text-slate-500 text-sm">
+              Or WhatsApp us for instant response • RERA Registered • 15+ Years Experience
+            </p>
           </motion.div>
         </div>
       </section>

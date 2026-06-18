@@ -26,26 +26,39 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <p className="text-amber-400 font-semibold text-sm tracking-widest uppercase mb-6">
-                Get Started
+                Start Your Project
               </p>
 
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-                Tell us about{' '}
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                Get Your{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-                  your project
+                  Free Quotation
                 </span>
               </h1>
 
               <p className="text-xl text-slate-300 mb-12 leading-relaxed font-light">
-                Share a few details and our team will reach out for a consultation.
-                Once you come on board, you get portal access to track drawings,
-                payments and on-site progress in real time.
+                Share your plot details, budget, and requirements. Our team will provide
+                a detailed cost estimate and construction timeline within 48 hours. Get portal
+                access after project starts to track everything — from BBMP approvals to final handover.
               </p>
 
               {/* Contact info card */}
               <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl mb-10">
-                <h3 className="font-display text-2xl font-bold text-white mb-8">Reach us directly</h3>
+                <h3 className="font-display text-2xl font-bold text-white mb-8">Contact Us</h3>
                 <div className="space-y-6">
+                  <div className="flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-bold text-white mb-2">Phone & WhatsApp</p>
+                      <p className="text-slate-400 text-sm">+91 98765 43210 (9 AM - 6 PM)</p>
+                      <p className="text-green-400 text-xs mt-1">📱 WhatsApp for instant response</p>
+                    </div>
+                  </div>
+
                   <div className="flex items-start gap-5">
                     <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0">
                       <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +68,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-bold text-white mb-2">Office Address</p>
-                      <p className="text-slate-400 text-sm leading-relaxed">#43, 10th Cross, 6th Main, Mahalakshmi Layout, Bangalore 560086</p>
+                      <p className="text-slate-400 text-sm leading-relaxed">#43, 10th Cross, 6th Main<br/>Mahalakshmi Layout<br/>Bengaluru, Karnataka 560086</p>
                     </div>
                   </div>
 
@@ -80,6 +93,7 @@ export default function ContactPage() {
                     <div>
                       <p className="font-bold text-white mb-2">Working Hours</p>
                       <p className="text-slate-400 text-sm">Monday - Saturday: 9:00 AM - 6:00 PM</p>
+                      <p className="text-slate-500 text-xs mt-1">Sunday by appointment</p>
                     </div>
                   </div>
                 </div>
@@ -88,16 +102,16 @@ export default function ContactPage() {
               {/* Trust indicators */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center p-5 bg-slate-900 border border-slate-800 rounded-xl">
-                  <div className="text-3xl font-bold font-display text-amber-400 mb-2">120+</div>
+                  <div className="text-2xl font-bold font-display text-amber-400 mb-1">₹85Cr+</div>
                   <div className="text-xs text-slate-400 uppercase tracking-wider">Projects</div>
                 </div>
                 <div className="text-center p-5 bg-slate-900 border border-slate-800 rounded-xl">
-                  <div className="text-3xl font-bold font-display text-amber-400 mb-2">15+</div>
-                  <div className="text-xs text-slate-400 uppercase tracking-wider">Years</div>
+                  <div className="text-2xl font-bold font-display text-green-400 mb-1">RERA</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wider">Registered</div>
                 </div>
                 <div className="text-center p-5 bg-slate-900 border border-slate-800 rounded-xl">
-                  <div className="text-3xl font-bold font-display text-amber-400 mb-2">8</div>
-                  <div className="text-xs text-slate-400 uppercase tracking-wider">Cities</div>
+                  <div className="text-2xl font-bold font-display text-blue-400 mb-1">100%</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wider">Transparent</div>
                 </div>
               </div>
             </motion.div>

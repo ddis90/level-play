@@ -46,6 +46,53 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#0a0f1a] flex items-center justify-center p-6">
+      {/* Navigation Bar */}
+      <motion.nav
+        className="absolute top-0 left-0 right-0 z-50 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-xl"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, type: "spring" }}
+      >
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <motion.div
+                className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center font-black text-slate-950 shadow-lg shadow-amber-500/20"
+                whileHover={{ scale: 1.05, rotate: 5 }}
+              >
+                LP
+              </motion.div>
+              <span className="font-display text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                Levelplay
+              </span>
+            </Link>
+
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
+                Home
+              </Link>
+              <Link href="/team" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
+                Our Team
+              </Link>
+              <Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
+                Contact
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <Link
+              href="/"
+              className="md:hidden text-slate-400 hover:text-white transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </motion.nav>
       {/* Animated blueprint grid background */}
       <div className="absolute inset-0 opacity-[0.03]">
         <motion.div
