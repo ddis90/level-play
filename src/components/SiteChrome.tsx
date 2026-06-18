@@ -1,18 +1,5 @@
 import Link from 'next/link';
 import { Building2, Mail, MapPin, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-const NAV = [
-  { href: '/#services', label: 'Services' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/team', label: 'Our Team' },
-  { href: '/#why', label: 'Why Us' },
-  { href: '/contact', label: 'Contact' },
-];
-
-import Link from 'next/link';
-import { Building2, Mail, MapPin, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import ThemeToggle from './ThemeToggle';
 
 const NAV = [
