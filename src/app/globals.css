@@ -4,31 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark theme: Deep slate with amber accents */
+/* Dark theme CSS variables */
 @layer base {
   :root {
-    --background: 222 47% 7%;         /* #0a0f1a - deep slate */
-    --foreground: 0 0% 98%;           /* #fafafa - off-white */
-    --card: 222 47% 10%;              /* #0f1624 - card background */
-    --card-foreground: 0 0% 98%;
-    --popover: 222 47% 10%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 32 95% 58%;            /* #f59e0b - amber-500 */
+    --background: 0 0% 100%;           /* white */
+    --foreground: 222 47% 11%;         /* slate-900 */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 32 95% 58%;             /* amber-500 */
     --primary-foreground: 222 47% 7%;
-    --secondary: 217 33% 17%;         /* #1e293b - slate-800 */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;  /* #94a3b8 - slate-400 */
-    --accent: 32 95% 58%;             /* amber accent */
-    --accent-foreground: 222 47% 7%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 217 33% 17%;            /* subtle borders */
-    --input: 217 33% 17%;
-    --ring: 32 95% 58%;
-    --radius: 0.85rem;
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-display: 'Space Grotesk', var(--font-sans);
+    --border: 214 32% 91%;             /* slate-200 */
+  }
+
+  .dark {
+    --background: 222 47% 7%;          /* #0a0f1a */
+    --foreground: 0 0% 98%;            /* #fafafa */
+    --card: 222 47% 10%;
+    --card-foreground: 0 0% 98%;
+    --primary: 32 95% 58%;
+    --primary-foreground: 222 47% 7%;
+    --border: 217 33% 17%;             /* slate-800 */
   }
 
   * {

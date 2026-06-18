@@ -10,27 +10,41 @@ const NAV = [
   { href: '/contact', label: 'Contact' },
 ];
 
+import Link from 'next/link';
+import { Building2, Mail, MapPin, Phone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import ThemeToggle from './ThemeToggle';
+
+const NAV = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/team', label: 'Our Team' },
+  { href: '/#why', label: 'Why Us' },
+  { href: '/contact', label: 'Contact' },
+];
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 text-white backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 text-slate-900 dark:text-white backdrop-blur-xl transition-colors">
       <div className="container flex h-[72px] items-center justify-between">
         <Link href="/" className="flex items-center gap-3 font-display text-xl font-bold group">
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 font-black text-slate-950 shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow">
             LP
           </span>
-          <span className="hidden sm:inline group-hover:text-amber-400 transition-colors">Levelplay</span>
+          <span className="hidden sm:inline group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Levelplay</span>
         </Link>
         <nav className="flex items-center gap-8">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className="hidden text-sm font-semibold text-slate-400 transition-colors hover:text-amber-400 md:inline relative group"
+              className="hidden text-sm font-semibold text-slate-600 dark:text-slate-400 transition-colors hover:text-amber-500 dark:hover:text-amber-400 md:inline relative group"
             >
               {n.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
           ))}
+          <ThemeToggle />
           <Link
             href="/login"
             className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-sm rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
