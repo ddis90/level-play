@@ -29,10 +29,40 @@ export async function POST(req: NextRequest) {
 
     createSessionCookie(user);
     return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error('Login verification error:', err);
+  } catch (err: any) {
+    console.error('Login verification error:', {
+      message: err.message,
+      code: err.code,
+      name: err.name,
+    });
+
+    // Provide more specific error messages based on error type
+    if (err.code === 'P1001' || err.message?.includes("Can't reach database")) {
+      return NextResponse.json(
+        {
+          error: 'Database connection failed. The database may not be configured or running.',
+          details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+        },
+        { status: 503 }
+      );
+    }
+
+    if (err.code === 'P2021' || err.message?.includes('does not exist')) {
+      return NextResponse.json(
+        {
+          error: 'Database schema error. The database needs to be migrated.',
+          details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+        },
+        { status: 503 }
+      );
+    }
+
+    // Generic server error
     return NextResponse.json(
-      { error: 'Server error during login. Please try again.' },
+      {
+        error: 'Server error during login. Please contact support if this persists.',
+        details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+      },
       { status: 500 }
     );
   }
