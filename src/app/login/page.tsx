@@ -58,12 +58,12 @@ export default function LoginPage() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <motion.div
-                className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center font-black text-slate-950 shadow-lg shadow-amber-500/20"
+                className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20"
                 whileHover={{ scale: 1.05, rotate: 5 }}
               >
                 LP
               </motion.div>
-              <span className="font-display text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+              <span className="font-display text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
                 Levelplay
               </span>
             </Link>
@@ -163,14 +163,14 @@ export default function LoginPage() {
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center gap-3 mb-8 group">
             <motion.div
-              className="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center font-black text-slate-950 text-xl shadow-lg shadow-amber-500/20"
+              className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg shadow-cyan-500/20"
               whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               LP
             </motion.div>
             <div>
-              <div className="font-display text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+              <div className="font-display text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
                 Levelplay
               </div>
               <div className="text-xs text-slate-400 tracking-wider uppercase">Portal Access</div>
@@ -237,7 +237,7 @@ export default function LoginPage() {
             <motion.button
               type="submit"
               disabled={loading}
-              className="w-full relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 disabled:from-slate-700 disabled:to-slate-700 text-slate-950 disabled:text-slate-500 font-bold text-lg rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 disabled:shadow-none overflow-hidden"
+              className="w-full relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 disabled:from-slate-700 disabled:to-slate-800 text-white disabled:text-slate-500 font-bold text-lg rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/35 disabled:shadow-none overflow-hidden"
               whileHover={!loading ? { scale: 1.02 } : {}}
               whileTap={!loading ? { scale: 0.98 } : {}}
             >

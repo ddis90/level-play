@@ -131,7 +131,7 @@ export default function TeamPage() {
             </p>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
               Meet the people building{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600">
                 your dreams
               </span>
             </h1>
@@ -150,11 +150,11 @@ export default function TeamPage() {
             <div key={idx} className="mb-20 last:mb-0">
               {/* Category Header */}
               <div className="flex items-center gap-6 mb-12">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
                   {section.category}
                 </h2>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
               </div>
 
               <motion.div
@@ -216,7 +216,7 @@ export default function TeamPage() {
                     </div>
 
                     {/* Bottom accent */}
-                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-amber-500 to-orange-500 group-hover:w-full transition-all duration-700"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-cyan-500 to-cyan-600 group-hover:w-full transition-all duration-700"></div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -235,7 +235,7 @@ export default function TeamPage() {
 
         <div className="container max-w-5xl mx-auto text-center relative z-10">
           <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">start your project</span>?
+            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600">start your project</span>?
           </h2>
           <p className="text-2xl text-slate-300 mb-12 font-light">
             Our team is ready to bring your construction vision to life.
@@ -243,7 +243,7 @@ export default function TeamPage() {
           <div className="flex flex-wrap gap-5 justify-center">
             <Link
               href="/contact"
-              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105"
+              className="group px-10 py-5 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-2xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105"
             >
               Get in Touch
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>

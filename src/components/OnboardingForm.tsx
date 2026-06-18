@@ -176,7 +176,7 @@ export function OnboardingForm() {
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="w-full px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 disabled:from-slate-700 disabled:to-slate-700 text-slate-950 disabled:text-slate-500 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105 disabled:scale-100 disabled:shadow-none"
+          className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 disabled:from-slate-700 disabled:to-slate-800 text-white disabled:text-slate-500 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 disabled:scale-100 disabled:shadow-none"
         >
           {status === 'sending' ? 'Sending Request...' : 'Get Free Quotation →'}
         </button>

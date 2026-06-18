@@ -4,16 +4,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark theme CSS variables */
+/* Unified color system - Cyan/Teal Construction Theme */
 @layer base {
   :root {
     --background: 0 0% 100%;           /* white */
     --foreground: 222 47% 11%;         /* slate-900 */
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
-    --primary: 32 95% 58%;             /* amber-500 */
-    --primary-foreground: 222 47% 7%;
+    --primary: 188 94% 43%;            /* cyan-600 */
+    --primary-foreground: 0 0% 100%;   /* white */
+    --secondary: 173 58% 39%;          /* teal-600 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;              /* slate-50 */
+    --muted-foreground: 215 16% 47%;   /* slate-600 */
+    --accent: 186 100% 40%;            /* cyan-500 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;          /* red-500 */
+    --destructive-foreground: 0 0% 100%;
     --border: 214 32% 91%;             /* slate-200 */
+    --input: 214 32% 91%;
+    --ring: 188 94% 43%;               /* cyan-600 */
+    --success: 160 84% 39%;            /* emerald-600 */
+    --warning: 38 92% 50%;             /* amber-500 */
   }
 
   .dark {
@@ -21,9 +33,21 @@
     --foreground: 0 0% 98%;            /* #fafafa */
     --card: 222 47% 10%;
     --card-foreground: 0 0% 98%;
-    --primary: 32 95% 58%;
-    --primary-foreground: 222 47% 7%;
+    --primary: 188 94% 43%;            /* cyan-600 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 173 58% 39%;          /* teal-600 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;              /* slate-800 */
+    --muted-foreground: 215 20% 65%;   /* slate-400 */
+    --accent: 186 100% 40%;            /* cyan-500 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
     --border: 217 33% 17%;             /* slate-800 */
+    --input: 217 33% 17%;
+    --ring: 188 94% 43%;
+    --success: 160 84% 39%;
+    --warning: 38 92% 50%;
   }
 
   * {
@@ -32,24 +56,25 @@
 }
 
 :root {
-  /* Construction brand: trustworthy navy + amber accent, warm neutrals */
-  --navy: #0d1b2a;
-  --navy-2: #1b263b;
-  --slate: #415a77;
-  --steel: #778da9;
-  --mist: #e0e1dd;
-  --amber: #f4a261;
-  --amber-strong: #e76f51;
-  --gold: #ffb703;
-  --paper: #f7f7f5;
+  /* Unified Construction Theme - Cyan/Teal Primary */
+  --navy: #0a0f1a;
+  --navy-2: #0f172a;
+  --slate: #475569;
+  --steel: #64748b;
+  --mist: #e2e8f0;
+  --cyan-primary: #0891b2;        /* cyan-600 - primary brand */
+  --cyan-light: #06b6d4;          /* cyan-500 */
+  --teal-primary: #0d9488;        /* teal-600 - secondary brand */
+  --teal-light: #14b8a6;          /* teal-500 */
+  --paper: #f8fafc;
   --white: #ffffff;
-  --ink: #1a1a1a;
-  --ok: #2a9d8f;
-  --warn: #e9c46a;
-  --danger: #e63946;
+  --ink: #0f172a;
+  --ok: #059669;                  /* emerald-600 - success */
+  --warn: #f59e0b;                /* amber-500 - warning */
+  --danger: #dc2626;              /* red-600 - error */
   --radius: 14px;
-  --shadow: 0 18px 40px rgba(13, 27, 42, 0.12);
-  --shadow-sm: 0 4px 14px rgba(13, 27, 42, 0.08);
+  --shadow: 0 20px 40px rgba(8, 145, 178, 0.10);
+  --shadow-sm: 0 4px 14px rgba(8, 145, 178, 0.08);
   --maxw: 1180px;
 }
 
@@ -83,21 +108,48 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.01em; }
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 700;
+  border-radius: 0.75rem;
+  font-weight: 600;
   font-size: 0.98rem;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: transform 0.08s, box-shadow 0.15s, background 0.15s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn:active { transform: translateY(1px); }
-.btn-primary { background: var(--amber-strong); color: var(--white); box-shadow: var(--shadow-sm); }
-.btn-primary:hover { background: #d65a3c; }
-.btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.5); }
-.btn-ghost:hover { background: rgba(255,255,255,0.12); }
+.btn-primary {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0891b2, #0e7490);
+  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.35);
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25);
+}
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.35);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.2);
+}
+.btn-ghost:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.3);
+}
 .btn-dark { background: var(--navy); color: var(--white); }
 .btn-dark:hover { background: var(--navy-2); }
-.btn-light { background: var(--white); color: var(--navy); box-shadow: var(--shadow-sm); }
+.btn-light {
+  background: var(--white);
+  color: var(--cyan-primary);
+  box-shadow: var(--shadow-sm);
+}
 
 /* --- Header / nav ---------------------------------------------------------- */
 .site-header {
