@@ -5,7 +5,7 @@ import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import { AnimatedButton, ProgressBar, Badge } from '@/components/ui';
 import { FlipCard, GlassCard, Depth3DCard, FloatingElement, ConnectSection } from '@/components/advanced-ui';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { CheckCircle2, Shield, TrendingUp, Award, MapPin, Users, FileCheck, Building2, Sparkles } from 'lucide-react';
 
 const SERVICES = [
@@ -82,8 +82,29 @@ const PROJECTS = [
   },
 ];
 
-// Flipping project card with image on back
+// Random building images pool
+const BUILDING_IMAGES = [
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop',
+];
+
+// Flipping project card with random building image on back
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: number }) {
+  // Generate random building image on mount (different from front)
+  const [randomImage, setRandomImage] = useState(project.image);
+
+  useEffect(() => {
+    // Pick a random image different from the front
+    const availableImages = BUILDING_IMAGES.filter(img => img !== project.image);
+    const randomIndex = Math.floor(Math.random() * availableImages.length);
+    setRandomImage(availableImages[randomIndex]);
+  }, [project.image]);
+
   return (
     <Depth3DCard>
       <FlipCard
@@ -96,6 +117,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: n
                 alt={project.name}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
+                priority={index === 0}
               />
               <div className="absolute top-4 right-4">
                 <Badge
@@ -122,8 +144,8 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: n
           <GlassCard intensity="strong" className="h-full relative overflow-hidden">
             <div className="absolute inset-0">
               <Image
-                src={project.image}
-                alt={project.name}
+                src={randomImage}
+                alt={`${project.name} - additional view`}
                 fill
                 className="object-cover opacity-20 dark:opacity-10"
               />
@@ -153,7 +175,6 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: n
     </Depth3DCard>
   );
 }
-
 // Service card with stats on flip
 function ServiceCard({ service, index }: { service: typeof SERVICES[0], index: number }) {
   return (
