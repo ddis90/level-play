@@ -55,6 +55,9 @@ export async function verifyCredentials(
   password: string,
 ): Promise<SessionUser | null> {
   try {
+    // Test database connection first
+    await prisma.$connect();
+
     const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase().trim() },
       include: { roles: { include: { role: true } } },
@@ -79,8 +82,13 @@ export async function verifyCredentials(
       fullName: user.fullName,
       roles: user.roles.map((ur) => ur.role.name),
     };
-  } catch (err) {
-    console.error('Database error during credential verification:', err);
+  } catch (err: any) {
+    console.error('Database error during credential verification:', {
+      message: err.message,
+      code: err.code,
+      meta: err.meta,
+      stack: err.stack,
+    });
     throw err; // Let the route handler catch and return 500
   }
 }

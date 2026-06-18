@@ -46,8 +46,8 @@ export function AnimatedButton({
   href
 }: AnimatedButtonProps) {
   const variants = {
-    primary: 'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 hover:from-amber-400 hover:to-orange-400 shadow-lg shadow-amber-500/20',
-    secondary: 'border-2 border-slate-700 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-amber-500 hover:text-amber-500',
+    primary: 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:from-cyan-400 hover:to-teal-400 shadow-lg shadow-cyan-500/20',
+    secondary: 'border-2 border-slate-700 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-cyan-500 hover:text-cyan-500',
     ghost: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700',
   };
 
@@ -128,12 +128,12 @@ export function ProgressBar({ value, max = 100, className = '', showLabel = true
       {showLabel && (
         <div className="flex justify-between text-sm mb-2">
           <span className="text-slate-600 dark:text-slate-400">Progress</span>
-          <span className="text-amber-500 dark:text-amber-400 font-bold">{Math.round(percentage)}%</span>
+          <span className="text-cyan-500 dark:text-cyan-400 font-bold">{Math.round(percentage)}%</span>
         </div>
       )}
       <div className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-amber-500 to-orange-500"
+          className="h-full bg-gradient-to-r from-cyan-500 to-teal-500"
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
@@ -152,7 +152,7 @@ interface BadgeProps {
 export function Badge({ children, variant = 'default', pulse = false }: BadgeProps) {
   const variants = {
     success: 'bg-green-500/20 text-green-400 border-green-500/30',
-    warning: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+    warning: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
     info: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
     default: 'bg-slate-500/20 text-slate-400 dark:text-slate-300 border-slate-500/30',
   };

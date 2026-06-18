@@ -190,7 +190,7 @@ export function FloatingElement({
         ease: 'easeInOut',
       }}
     >
-      <svg viewBox="0 0 100 100" className="text-amber-500">
+      <svg viewBox="0 0 100 100" className="text-cyan-500">
         {shapes[shape]}
       </svg>
     </motion.div>
@@ -222,7 +222,7 @@ export function ConnectSection() {
           >
             <h2 className="font-display text-5xl md:text-6xl font-black text-white mb-6">
               Let's Build Your
-              <span className="block bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-cyan-400 to-teal-500 bg-clip-text text-transparent">
                 Dream Project
               </span>
             </h2>
@@ -243,7 +243,7 @@ export function ConnectSection() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                     placeholder="Rajesh Kumar"
                   />
                 </div>
@@ -254,7 +254,7 @@ export function ConnectSection() {
                   </label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                     placeholder="+91 98765 43210"
                   />
                 </div>
@@ -263,7 +263,7 @@ export function ConnectSection() {
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Project Type
                   </label>
-                  <select className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all">
+                  <select className="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all">
                     <option>Individual Home</option>
                     <option>Villa</option>
                     <option>Apartment</option>
@@ -274,7 +274,7 @@ export function ConnectSection() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-[1.02]"
+                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.02]"
                 >
                   Get Free Consultation
                 </button>

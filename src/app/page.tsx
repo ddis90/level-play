@@ -13,25 +13,25 @@ const SERVICES = [
     icon: '🏠',
     title: 'Individual Homes & Villas',
     body: 'Custom-designed independent houses and duplex villas. From 30x40 plots to sprawling estates — built with structural certification, transparent costing, and bank-approved plans.',
-    stats: { projects: '85+', avgSize: '2,400 sq.ft', satisfaction: '98%' }
+    stats: { projects: '85+', avgSize: '2,400 sq.ft' }
   },
   {
     icon: '🏢',
     title: 'Apartment Projects',
     body: 'G+4 to high-rise residential complexes with modern amenities. IS 456:2000 compliant design, proper ventilation, and approved layouts from BBMP/BDA/BMRDA.',
-    stats: { projects: '24', avgSize: '12 Units/Project', satisfaction: '96%' }
+    stats: { projects: '24', avgSize: '12 Units/Project' }
   },
   {
     icon: '🏬',
     title: 'Commercial Spaces',
     body: 'Shops, showrooms, offices, and warehouses built for business growth. Strategic layouts, ample parking, complete structural warranty.',
-    stats: { projects: '32+', avgSize: '8,000 sq.ft', satisfaction: '97%' }
+    stats: { projects: '32+', avgSize: '8,000 sq.ft' }
   },
   {
     icon: '🛋️',
     title: 'Interiors & Fit-outs',
     body: 'Complete interior solutions — modular kitchens, wardrobes, false ceilings, electrical & plumbing. Premium finishes that suit Indian lifestyles.',
-    stats: { projects: '120+', avgSize: '1,800 sq.ft', satisfaction: '99%' }
+    stats: { projects: '120+', avgSize: '1,800 sq.ft' }
   },
 ];
 
@@ -43,7 +43,9 @@ const PROJECTS = [
     badge: 'progress',
     area: '2,400 sq.ft',
     progress: 65,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop'
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+    completionDate: 'Dec 2026',
+    description: 'Modern 3BHK villa with contemporary design, spacious balconies, and premium finishes. Features include modular kitchen, designer bathrooms, and landscaped garden.'
   },
   {
     name: 'Green Orchards Apartment',
@@ -52,7 +54,9 @@ const PROJECTS = [
     badge: 'design',
     area: '24 Units, G+4',
     progress: 25,
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop'
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
+    completionDate: 'Jun 2027',
+    description: 'Boutique apartment complex with 2 & 3 BHK units. Amenities include clubhouse, gym, children\'s play area, and rooftop terrace with city views.'
   },
   {
     name: 'Sri Sai Commercial Complex',
@@ -61,7 +65,9 @@ const PROJECTS = [
     badge: 'done',
     area: '12,000 sq.ft',
     progress: 100,
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop'
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+    completionDate: 'Mar 2026',
+    description: 'Multi-purpose commercial building with retail shops on ground floor and office spaces above. Prime location with excellent parking facilities.'
   },
   {
     name: 'Lakeview Premium Interiors',
@@ -70,11 +76,13 @@ const PROJECTS = [
     badge: 'done',
     area: '3 BHK, 1,800 sq.ft',
     progress: 100,
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop'
+    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
+    completionDate: 'Jan 2026',
+    description: 'Luxury interior transformation with Italian marble flooring, designer lighting, imported fixtures, and custom-built furniture throughout the residence.'
   },
 ];
 
-// Flipping project card with glassmorphism
+// Flipping project card with image on back
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: number }) {
   return (
     <Depth3DCard>
@@ -104,30 +112,41 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: n
                 <MapPin className="w-4 h-4" />
                 <span className="text-sm">{project.city}</span>
               </div>
-              <div className="text-sm font-semibold text-amber-600 dark:text-amber-400">{project.area}</div>
-              <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click to flip</div>
+              <div className="text-sm font-semibold text-cyan-600 dark:text-cyan-400 mb-2">{project.area}</div>
+              {project.progress < 100 && <ProgressBar value={project.progress} className="mb-2" />}
+              <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click for details</div>
             </div>
           </GlassCard>
         }
         back={
-          <GlassCard intensity="strong" className="h-full p-6 flex flex-col justify-between">
-            <div>
-              <h3 className="font-display text-xl font-bold mb-4 text-slate-900 dark:text-white">{project.name}</h3>
-              <ProgressBar value={project.progress} className="mb-6" />
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-sm text-slate-600 dark:text-slate-400">Location</div>
-                  <div className="text-sm font-bold text-slate-900 dark:text-white">{project.city}</div>
-                </div>
-                <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-sm text-slate-600 dark:text-slate-400">Area</div>
-                  <div className="text-sm font-bold text-slate-900 dark:text-white">{project.area}</div>
+          <GlassCard intensity="strong" className="h-full relative overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover opacity-20 dark:opacity-10"
+              />
+            </div>
+            <div className="relative z-10 h-full p-6 flex flex-col justify-between bg-gradient-to-b from-slate-900/80 to-slate-900/95 dark:from-slate-950/90 dark:to-slate-950/98">
+              <div>
+                <h3 className="font-display text-xl font-bold mb-3 text-white">{project.name}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-4">{project.description}</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white/10 rounded-lg p-3">
+                    <div className="text-xs text-slate-400">Area</div>
+                    <div className="text-sm font-bold text-white">{project.area}</div>
+                  </div>
+                  <div className="bg-white/10 rounded-lg p-3">
+                    <div className="text-xs text-slate-400">Completion</div>
+                    <div className="text-sm font-bold text-white">{project.completionDate}</div>
+                  </div>
                 </div>
               </div>
+              <AnimatedButton variant="primary" size="sm" className="w-full mt-4">
+                View Full Details
+              </AnimatedButton>
             </div>
-            <AnimatedButton variant="primary" size="sm" className="w-full">
-              View Full Details
-            </AnimatedButton>
           </GlassCard>
         }
       />
@@ -135,7 +154,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: n
   );
 }
 
-// Service card with hover flip
+// Service card with stats on flip
 function ServiceCard({ service, index }: { service: typeof SERVICES[0], index: number }) {
   return (
     <FlipCard
@@ -148,23 +167,22 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0], index: n
           <div className="text-5xl mb-4">{service.icon}</div>
           <h3 className="font-display text-xl font-bold mb-3 text-slate-900 dark:text-white">{service.title}</h3>
           <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{service.body}</p>
-          <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click to see stats</div>
+          <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click for stats</div>
         </GlassCard>
       }
       back={
-        <GlassCard intensity="strong" className="h-full p-6 flex flex-col justify-around">
+        <GlassCard intensity="strong" className="h-full p-6 flex flex-col justify-around bg-gradient-to-br from-cyan-500/10 to-teal-500/10 dark:from-cyan-500/5 dark:to-teal-500/5">
           <div className="text-center">
-            <div className="text-4xl font-black text-amber-500 dark:text-amber-400 mb-2">{service.stats.projects}</div>
-            <div className="text-sm text-slate-600 dark:text-slate-400">Projects Completed</div>
+            <div className="text-5xl font-black bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent mb-2">{service.stats.projects}</div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 font-semibold">Projects Completed</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-black text-amber-500 dark:text-amber-400 mb-2">{service.stats.avgSize}</div>
-            <div className="text-sm text-slate-600 dark:text-slate-400">Average Size</div>
+            <div className="text-4xl font-black text-slate-900 dark:text-white mb-2">{service.stats.avgSize}</div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 font-semibold">Average Project Size</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-black text-green-500 dark:text-green-400 mb-2">{service.stats.satisfaction}</div>
-            <div className="text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</div>
-          </div>
+          <AnimatedButton variant="primary" size="sm" className="w-full mt-4">
+            Learn More
+          </AnimatedButton>
         </GlassCard>
       }
     />
@@ -227,11 +245,11 @@ export default function HomePage() {
             >
               <span className="text-slate-900 dark:text-white">Build Your </span>
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent animate-gradient">
+                <span className="bg-gradient-to-r from-cyan-500 via-teal-500 to-cyan-600 bg-clip-text text-transparent animate-gradient">
                   Dream Home
                 </span>
                 <motion.span
-                  className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-amber-500/50 to-orange-500/50 blur-xl"
+                  className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-cyan-500/50 to-teal-500/50 blur-xl"
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -281,7 +299,7 @@ export default function HomePage() {
                   intensity="light"
                   className="p-6 text-center"
                 >
-                  <item.icon className="w-8 h-8 mx-auto mb-3 text-amber-500 dark:text-amber-400" />
+                  <item.icon className="w-8 h-8 mx-auto mb-3 text-cyan-500 dark:text-cyan-400" />
                   <div className="font-black text-2xl text-slate-900 dark:text-white">{item.label}</div>
                   <div className="text-sm text-slate-600 dark:text-slate-400">{item.sublabel}</div>
                 </GlassCard>
@@ -387,7 +405,7 @@ export default function HomePage() {
                 intensity="medium"
                 className="p-8 text-center hover:bg-white/30 dark:hover:bg-white/10 transition-all duration-300"
               >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-display text-2xl font-bold mb-3 text-slate-900 dark:text-white">{item.title}</h3>
@@ -400,7 +418,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-teal-600 dark:from-cyan-600 dark:to-orange-700"></div>
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
 
         <div className="container relative z-10">
@@ -418,7 +436,7 @@ export default function HomePage() {
                 Get a free, no-obligation quotation within 24 hours. Our experts are ready to discuss your project.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <AnimatedButton variant="ghost" size="lg" href="/contact" className="bg-white text-amber-600 hover:bg-white/90">
+                <AnimatedButton variant="ghost" size="lg" href="/contact" className="bg-white text-cyan-600 hover:bg-white/90">
                   Get Free Quotation
                 </AnimatedButton>
                 <AnimatedButton variant="ghost" size="lg" href="tel:+919876543210" className="border-2 border-white text-white hover:bg-white/20">
