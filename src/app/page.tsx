@@ -1,30 +1,30 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
-import { GlassCard, AnimatedButton, FlipCard, ProgressBar, Badge } from '@/components/ui';
+import { AnimatedButton, ProgressBar, Badge } from '@/components/ui';
+import { FlipCard, GlassCard, Depth3DCard, FloatingElement, ConnectSection } from '@/components/advanced-ui';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useState, useRef } from 'react';
-import { CheckCircle2, Shield, TrendingUp, Award, MapPin, Clock, Users } from 'lucide-react';
+import { useRef } from 'react';
+import { CheckCircle2, Shield, TrendingUp, Award, MapPin, Users, FileCheck, Building2, Sparkles } from 'lucide-react';
 
 const SERVICES = [
   {
     icon: '🏠',
     title: 'Individual Homes & Villas',
-    body: 'Custom-designed independent houses and duplex villas. From 30x40 plots to sprawling estates — built as per Vastu, with RERA compliance and transparent costing.',
+    body: 'Custom-designed independent houses and duplex villas. From 30x40 plots to sprawling estates — built with structural certification, transparent costing, and bank-approved plans.',
     stats: { projects: '85+', avgSize: '2,400 sq.ft', satisfaction: '98%' }
   },
   {
     icon: '🏢',
     title: 'Apartment Projects',
-    body: 'G+4 to high-rise residential complexes with modern amenities. Earthquake-resistant design, proper ventilation, and approved layouts from BBMP/BDA/BMRDA.',
+    body: 'G+4 to high-rise residential complexes with modern amenities. IS 456:2000 compliant design, proper ventilation, and approved layouts from BBMP/BDA/BMRDA.',
     stats: { projects: '24', avgSize: '12 Units/Project', satisfaction: '96%' }
   },
   {
     icon: '🏬',
     title: 'Commercial Spaces',
-    body: 'Shops, showrooms, offices, and warehouses built for business growth. Strategic layouts, ample parking, 100% Vaastu-compliant if required.',
+    body: 'Shops, showrooms, offices, and warehouses built for business growth. Strategic layouts, ample parking, complete structural warranty.',
     stats: { projects: '32+', avgSize: '8,000 sq.ft', satisfaction: '97%' }
   },
   {
@@ -74,87 +74,64 @@ const PROJECTS = [
   },
 ];
 
-// Floating construction element component
-function FloatingElement({ delay = 0 }: { delay?: number }) {
-  return (
-    <motion.div
-      className="absolute w-24 h-24 opacity-10 dark:opacity-5"
-      initial={{ opacity: 0, rotate: 0 }}
-      animate={{
-        opacity: [0.05, 0.15, 0.05],
-        rotate: [0, 180, 360],
-        y: [0, -30, 0],
-      }}
-      transition={{
-        duration: 15,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    >
-      <svg viewBox="0 0 100 100" className="fill-amber-500">
-        <polygon points="50,10 90,90 10,90" />
-      </svg>
-    </motion.div>
-  );
-}
-
 // Flipping project card with glassmorphism
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0], index: number }) {
   return (
-    <FlipCard
-      className="h-[420px]"
-      front={
-        <GlassCard intensity="medium" className="h-full overflow-hidden group">
-          <div className="relative h-56">
-            <Image
-              src={project.image}
-              alt={project.name}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-            <div className="absolute top-4 right-4">
-              <Badge
-                variant={project.badge === 'done' ? 'success' : project.badge === 'progress' ? 'warning' : 'info'}
-                pulse={project.badge === 'progress'}
-              >
-                {project.status}
-              </Badge>
-            </div>
-          </div>
-          <div className="p-6">
-            <h3 className="font-display text-xl font-bold mb-2 text-slate-900 dark:text-white">{project.name}</h3>
-            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-3">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm">{project.city}</span>
-            </div>
-            <div className="text-sm font-semibold text-amber-600 dark:text-amber-400">{project.area}</div>
-            <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click to flip</div>
-          </div>
-        </GlassCard>
-      }
-      back={
-        <GlassCard intensity="strong" className="h-full p-6 flex flex-col justify-between">
-          <div>
-            <h3 className="font-display text-xl font-bold mb-4 text-slate-900 dark:text-white">{project.name}</h3>
-            <ProgressBar value={project.progress} className="mb-6" />
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
-                <div className="text-sm text-slate-600 dark:text-slate-400">Location</div>
-                <div className="text-sm font-bold text-slate-900 dark:text-white">{project.city}</div>
-              </div>
-              <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
-                <div className="text-sm text-slate-600 dark:text-slate-400">Area</div>
-                <div className="text-sm font-bold text-slate-900 dark:text-white">{project.area}</div>
+    <Depth3DCard>
+      <FlipCard
+        className="h-[420px]"
+        front={
+          <GlassCard intensity="medium" className="h-full overflow-hidden group">
+            <div className="relative h-56">
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute top-4 right-4">
+                <Badge
+                  variant={project.badge === 'done' ? 'success' : project.badge === 'progress' ? 'warning' : 'info'}
+                  pulse={project.badge === 'progress'}
+                >
+                  {project.status}
+                </Badge>
               </div>
             </div>
-          </div>
-          <AnimatedButton variant="primary" size="sm" className="w-full">
-            View Full Details
-          </AnimatedButton>
-        </GlassCard>
-      }
-    />
+            <div className="p-6">
+              <h3 className="font-display text-xl font-bold mb-2 text-slate-900 dark:text-white">{project.name}</h3>
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-3">
+                <MapPin className="w-4 h-4" />
+                <span className="text-sm">{project.city}</span>
+              </div>
+              <div className="text-sm font-semibold text-amber-600 dark:text-amber-400">{project.area}</div>
+              <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click to flip</div>
+            </div>
+          </GlassCard>
+        }
+        back={
+          <GlassCard intensity="strong" className="h-full p-6 flex flex-col justify-between">
+            <div>
+              <h3 className="font-display text-xl font-bold mb-4 text-slate-900 dark:text-white">{project.name}</h3>
+              <ProgressBar value={project.progress} className="mb-6" />
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">Location</div>
+                  <div className="text-sm font-bold text-slate-900 dark:text-white">{project.city}</div>
+                </div>
+                <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">Area</div>
+                  <div className="text-sm font-bold text-slate-900 dark:text-white">{project.area}</div>
+                </div>
+              </div>
+            </div>
+            <AnimatedButton variant="primary" size="sm" className="w-full">
+              View Full Details
+            </AnimatedButton>
+          </GlassCard>
+        }
+      />
+    </Depth3DCard>
   );
 }
 
@@ -167,15 +144,11 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0], index: n
         <GlassCard
           intensity="medium"
           className="h-full p-6 hover:bg-white/20 dark:hover:bg-white/15 transition-all duration-300"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          viewport={{ once: true }}
         >
           <div className="text-5xl mb-4">{service.icon}</div>
           <h3 className="font-display text-xl font-bold mb-3 text-slate-900 dark:text-white">{service.title}</h3>
           <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{service.body}</p>
-          <div className="mt-4 text-xs text-slate-500 dark:text-slate-500">Hover to see stats</div>
+          <div className="mt-4 text-xs text-slate-500 dark:text-slate-500 text-center">Click to see stats</div>
         </GlassCard>
       }
       back={
@@ -222,9 +195,9 @@ export default function HomePage() {
         </div>
 
         {/* Floating Construction Elements */}
-        <FloatingElement delay={0} />
-        <FloatingElement delay={3} />
-        <FloatingElement delay={6} />
+        <FloatingElement delay={0} shape="triangle" size={120} />
+        <FloatingElement delay={3} shape="hexagon" size={100} />
+        <FloatingElement delay={6} shape="beam" size={140} />
 
         <motion.div
           className="container relative z-10"
@@ -242,7 +215,7 @@ export default function HomePage() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
-                RERA Registered | 100% Transparent
+                Certified Engineers | 10-Year Warranty | Bank-Approved Plans
               </span>
             </motion.div>
 
@@ -301,15 +274,12 @@ export default function HomePage() {
                 { icon: Award, label: '15+ Years', sublabel: 'Experience' },
                 { icon: CheckCircle2, label: '260+ Projects', sublabel: 'Delivered' },
                 { icon: Users, label: '98% Happy', sublabel: 'Clients' },
-                { icon: Shield, label: 'RERA', sublabel: 'Registered' },
+                { icon: Shield, label: '10-Year', sublabel: 'Warranty' },
               ].map((item, i) => (
                 <GlassCard
                   key={i}
                   intensity="light"
                   className="p-6 text-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.9 + i * 0.1 }}
                 >
                   <item.icon className="w-8 h-8 mx-auto mb-3 text-amber-500 dark:text-amber-400" />
                   <div className="font-black text-2xl text-slate-900 dark:text-white">{item.label}</div>
@@ -398,8 +368,8 @@ export default function HomePage() {
             {[
               {
                 icon: Shield,
-                title: 'RERA Registered',
-                body: 'Full compliance with Karnataka RERA. Track your project milestones and payments in real-time through our portal.'
+                title: 'Structural Certification',
+                body: 'IS 456:2000 compliant design with BBMP/BDA approved structural drawings. 10-year structural warranty on all residential projects.'
               },
               {
                 icon: TrendingUp,
@@ -407,20 +377,15 @@ export default function HomePage() {
                 body: 'Fixed cost per sq.ft with zero hidden charges. Complete bill of quantities shared upfront — no surprises later.'
               },
               {
-                icon: CheckCircle2,
-                title: 'Vastu Compliant',
-                body: 'All homes designed as per Vastu Shastra principles. East-facing entrances, proper room orientations, and auspicious layouts.'
+                icon: Building2,
+                title: 'Bank-Approved Plans',
+                body: 'All projects designed with bank loan approval in mind. Pre-approved layouts that meet financing requirements from major banks.'
               },
             ].map((item, i) => (
               <GlassCard
                 key={i}
                 intensity="medium"
                 className="p-8 text-center hover:bg-white/30 dark:hover:bg-white/10 transition-all duration-300"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
               >
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
                   <item.icon className="w-8 h-8 text-white" />
@@ -464,6 +429,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Connect Section */}
+      <ConnectSection />
 
       <SiteFooter />
     </div>

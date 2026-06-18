@@ -89,15 +89,23 @@ export function FlipCard({ front, back, className = '' }: FlipCardProps) {
         className="relative w-full h-full preserve-3d cursor-pointer"
         onClick={() => setIsFlipped(!isFlipped)}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
+        transition={{
+          duration: 0.6,
+          type: "spring",
+          stiffness: 120,
+          damping: 20
+        }}
       >
-        {/* Front */}
+        {/* Front - normal orientation */}
         <div className="absolute inset-0 backface-hidden">
           {front}
         </div>
 
-        {/* Back */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180">
+        {/* Back - PRE-FLIPPED so text reads correctly when parent rotates */}
+        <div
+          className="absolute inset-0 backface-hidden"
+          style={{ transform: 'rotateY(180deg)' }}
+        >
           {back}
         </div>
       </motion.div>
