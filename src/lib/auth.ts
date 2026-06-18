@@ -54,21 +54,35 @@ export async function verifyCredentials(
   email: string,
   password: string,
 ): Promise<SessionUser | null> {
-  const user = await prisma.user.findUnique({
-    where: { email: email.toLowerCase().trim() },
-    include: { roles: { include: { role: true } } },
-  });
-  if (!user || !user.isActive) return null;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase().trim() },
+      include: { roles: { include: { role: true } } },
+    });
 
-  const ok = await bcrypt.compare(password, user.passwordHash);
-  if (!ok) return null;
+    if (!user || !user.isActive) {
+      console.log('User not found or inactive:', email);
+      return null;
+    }
 
-  return {
-    id: user.id,
-    email: user.email,
-    fullName: user.fullName,
-    roles: user.roles.map((ur) => ur.role.name),
-  };
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) {
+      console.log('Password mismatch for:', email);
+      return null;
+    }
+
+    console.log('Login successful for:', email, 'roles:', user.roles.map(ur => ur.role.name));
+
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      roles: user.roles.map((ur) => ur.role.name),
+    };
+  } catch (err) {
+    console.error('Database error during credential verification:', err);
+    throw err; // Let the route handler catch and return 500
+  }
 }
 
 export function createSessionCookie(user: SessionUser) {

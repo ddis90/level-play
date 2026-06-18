@@ -11,7 +11,8 @@ export async function POST(req: NextRequest) {
   let json: unknown;
   try {
     json = await req.json();
-  } catch {
+  } catch (err) {
+    console.error('Login JSON parse error:', err);
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
 
@@ -20,11 +21,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Email and password are required.' }, { status: 422 });
   }
 
-  const user = await verifyCredentials(parsed.data.email, parsed.data.password);
-  if (!user) {
-    return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
-  }
+  try {
+    const user = await verifyCredentials(parsed.data.email, parsed.data.password);
+    if (!user) {
+      return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
+    }
 
-  createSessionCookie(user);
-  return NextResponse.json({ ok: true });
+    createSessionCookie(user);
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error('Login verification error:', err);
+    return NextResponse.json(
+      { error: 'Server error during login. Please try again.' },
+      { status: 500 }
+    );
+  }
 }

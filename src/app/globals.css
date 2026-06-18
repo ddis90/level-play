@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,8 +27,8 @@
     --input: 217 33% 17%;
     --ring: 32 95% 58%;
     --radius: 0.85rem;
-    --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-    --font-display: 'Syne', var(--font-sans);
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Space Grotesk', var(--font-sans);
   }
 
   * {
@@ -63,7 +63,7 @@
 html, body { padding: 0; margin: 0; }
 
 body {
-  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: #fafafa;
   background: #0a0f1a;
   line-height: 1.6;
@@ -71,7 +71,7 @@ body {
 }
 
 .font-display {
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
 a { color: inherit; text-decoration: none; }
